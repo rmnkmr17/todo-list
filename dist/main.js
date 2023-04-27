@@ -1,0 +1,1 @@
+(()=>{const s=new class{constructor(s,t,e,o){this.title=s,this.description=t,this.dueDate=e,this.priority=o}}("fare un sega","veloce","adesso","subito");console.log(s)})();
