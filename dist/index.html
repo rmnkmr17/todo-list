@@ -8,14 +8,57 @@
   </head>
   <body>
     <header>
-      <h1 id="title">To do ✓</h1>
-      <h4 id="subtitle">Organize your life</h4>
+      <h1 id="heading">To do ✓</h1>
     </header>
-    <main>
-      <div class="sidebar"></div>
-      <div class="tasks"></div>
-    </main>
-    <footer>An assignment by The Odin Project, 2023.</footer>
+    <div class="sidebar">
+      <div class="projects">
+        <div class="projects-title-container">
+          <h3 id="projects-title">MY PROJECTS</h3>
+        </div>
+        <div class="projects-list"></div>
+      </div>
+      <button id="add-project">Create a new project</button>
+    </div>
+    <div class="tasks">
+      <div id="add-task">+</div>
+      <div class="todo-list" id="task-list"></div>
+    </div>
+    <dialog class="modal">
+      <form id="form">
+        <div class="title formcontainer">
+          <h2>NEW TASK</h2>
+          <div id="close-modal">X</div>
+        </div>
+        <div class="task formcontainer">
+          <label for="title">title: </label>
+          <input required type="text" id="title" />
+        </div>
+        <div class="notes formcontainer">
+          <label for="description">description: </label>
+          <textarea name="description" id="description"></textarea>
+        </div>
+        <div class="date formcontainer">
+          <label for="date">date: </label>
+          <input required type="date" id="date" />
+        </div>
+        <div class="urgent formcontainer">
+          <label for="priority">priority: </label>
+          <select id="priority" name="priority">
+            <option value="low">low</option>
+            <option value="medium">medium</option>
+            <option value="high">high</option>
+          </select>
+        </div>
+        <!-- <div class="projectId formcontainer">
+          <label for="project">Project:</label>
+          <select id="project">
+            <option value="default">Default</option>
+          </select>
+        </div> -->
+        <input type="submit" id="submit" value="ADD" />
+        <!-- <input id="submit" formmethod="dialog" type="submit" value="ADD" /> -->
+      </form>
+    </dialog>
     <script src="main.js"></script>
   </body>
 </html>
