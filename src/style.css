@@ -148,6 +148,15 @@ form {
   padding: 40px;
 }
 
+#project-form {
+  height: 25vh;
+}
+
+.project-modal {
+  border-radius: 10px;
+  border: none;
+}
+
 #close-modal {
   user-select: none;
   display: flex;
@@ -164,6 +173,24 @@ form {
 }
 
 #close-modal:hover {
+  background-color: #666670;
+}
+#close-project-modal {
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  align-self: flex-end;
+  background-color: #a1a1aa;
+  color: white;
+}
+
+#close-project-modal:hover {
   background-color: #666670;
 }
 
@@ -193,7 +220,8 @@ select {
   border-radius: 5px;
 }
 
-#title {
+#title,
+#title-project {
   height: 30px;
   width: 50%;
 }
@@ -213,6 +241,17 @@ select {
 }
 
 #submit:hover {
+  background-color: #666670;
+}
+
+#submit-project {
+  cursor: pointer;
+  background-color: #a1a1aa;
+  font-size: 22px;
+  color: white;
+}
+
+#submit-project:hover {
   background-color: #666670;
 }
 
@@ -248,11 +287,12 @@ select {
   border: none;
   height: 30px;
   border-radius: 2px;
+  cursor: pointer;
 }
 
 #edit-btn {
   font-style: 32px;
-
+  cursor: pointer;
   width: 30px;
   background-color: rgb(167, 153, 222);
   color: white;
@@ -270,4 +310,5 @@ select {
   border: none;
   height: 30px;
   border-radius: 2px;
+  cursor: pointer;
 }

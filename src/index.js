@@ -1,17 +1,31 @@
 import "./style.css";
-import { modal, closeModal, openModal } from "./modalForm";
+import {
+  modal,
+  addProject,
+  closeModal,
+  closeProject,
+  openModal,
+  openProjectModal,
+  closeProjectModal,
+  projectModal,
+} from "./modalForm";
 import { Project, Projects, myProjects, defaultProject } from "./projects";
 import { renderProjects, renderTodos } from "./DOM";
 
 const createProject = () => {
-  document.querySelector("#add-project").addEventListener("click", () => {
-    const newProject = myProjects.createProject(
-      prompt("What's your project name")
-    );
+  const projectForm = document.querySelector("#project-form");
+  projectForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const inputProject = document.querySelector("#title-project").value;
+
+    console.log(inputProject);
+    const newProject = myProjects.createProject(inputProject);
     myProjects.selectProject(newProject);
     const newSelectedProject = myProjects.getSelectedProject();
     renderProjects(newSelectedProject);
     renderTodos(newSelectedProject);
+    projectForm.reset();
+    projectModal.close();
   });
 };
 
@@ -142,6 +156,8 @@ const doneTodo = (event) => {
 
 openModal();
 closeModal();
+openProjectModal();
+closeProjectModal();
 
 createTodos();
 createProject();

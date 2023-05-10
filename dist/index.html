@@ -49,14 +49,21 @@
             <option value="high">high</option>
           </select>
         </div>
-        <!-- <div class="projectId formcontainer">
-          <label for="project">Project:</label>
-          <select id="project">
-            <option value="default">Default</option>
-          </select>
-        </div> -->
         <input type="submit" id="submit" value="ADD" />
-        <!-- <input id="submit" formmethod="dialog" type="submit" value="ADD" /> -->
+      </form>
+    </dialog>
+
+    <dialog class="project-modal">
+      <form id="project-form">
+        <div class="title formcontainer">
+          <h2>NEW PROJECT</h2>
+          <div id="close-project-modal">X</div>
+        </div>
+        <div class="task formcontainer">
+          <label for="title">title: </label>
+          <input required type="text" id="title-project" />
+        </div>
+        <input type="submit" id="submit-project" value="ADD" />
       </form>
     </dialog>
     <script src="main.js"></script>
