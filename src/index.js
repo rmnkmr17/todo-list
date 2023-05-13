@@ -1,20 +1,14 @@
 import "./style.css";
 import {
   modal,
-  addProject,
   closeModal,
-  closeProject,
   openModal,
   openProjectModal,
   closeProjectModal,
   projectModal,
-  openEditModal,
-  closeEditModal,
-  editModal,
 } from "./modalForm";
-import { Project, Projects, myProjects, defaultProject } from "./projects";
+import { myProjects, defaultProject } from "./projects";
 import { renderProjects, renderTodos } from "./DOM";
-import { Todo } from "./todo";
 
 const createProject = () => {
   const projectForm = document.querySelector("#project-form");
@@ -44,6 +38,7 @@ const createTodos = () => {
       const dueDate = document.getElementById("date").value;
       const priority = document.getElementById("priority").value;
       const todo = selectedProject.addTodo(title);
+      console.log(dueDate);
       todo.setTitle(title);
       todo.setDescription(description);
       todo.setDueDate(dueDate);
@@ -83,44 +78,6 @@ function deleteTodoFromProject(project, index) {
     console.log(`Invalid index: ${index}`);
   }
 }
-// const editTodoForm = (event) => {
-//   const index = event.target.getAttribute("data-index");
-//   const todoToEdit = myProjects.getSelectedProject().getTodos()[index];
-//   console.log("todotoedit", index, todoToEdit);
-//   const titleToEdit = document.getElementById("edit-title");
-//   const descriptionToEdit = document.getElementById("edit-description");
-//   const dateToEdit = document.getElementById("edit-date");
-//   const priorityToEdit = document.getElementById("edit-priority");
-
-//   titleToEdit.value = todoToEdit.getTitle();
-//   descriptionToEdit.value = todoToEdit.getDescription();
-//   dateToEdit.value = todoToEdit.getDueDate();
-//   priorityToEdit.value = todoToEdit.getPriority();
-//   editModal.showModal();
-// };
-
-// const editForm = document.querySelector("#edit-form");
-// editForm.addEventListener("submit", (event) => {
-//   event.preventDefault();
-//   updateTodo(
-//     index,
-//     titleToEdit.value,
-//     descriptionToEdit.value,
-//     dateToEdit.value,
-//     priorityToEdit.value
-//   );
-// });
-
-// const updateTodo = (index, title, description, dueDate, priority) => {
-//   const editedTodo = myProjects.getSelectedProject().getTodos()[index];
-//   editedTodo.setTitle(title);
-//   editedTodo.setDescription(description);
-//   editedTodo.setDueDate(dueDate);
-//   editedTodo.setPriority(priority);
-//   console.log("editedtodo", editedTodo);
-//   renderTodos(myProjects.getSelectedProject());
-//   editModal.close();
-// };
 
 const editTodoForm = (event) => {
   const project = myProjects.getSelectedProject();
@@ -237,6 +194,9 @@ const editTodoForm = (event) => {
 
   dialog.showModal();
 
+  closeBtn.addEventListener("click", () => {
+    dialog.close();
+  });
   // add an event listener to the form
   editForm.addEventListener("submit", (event) => {
     event.preventDefault();

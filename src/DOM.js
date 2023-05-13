@@ -41,59 +41,6 @@ function createProjectButton(projectName) {
   return projectBtn;
 }
 
-// const renderTodos = (project) => {
-//   myProjects.selectProject(project);
-//   myProjects.getSelectedProject();
-//   const todos = project.todos;
-//   console.log("renderTodos, todos list", todos);
-//   const todosContainer = document.querySelector(".todo-list");
-//   todosContainer.innerHTML = "";
-//   for (let todo of todos) {
-//     console.log("todo loop", todo);
-//     const todoEl = document.createElement("p");
-//     todoEl.classList.add("my-todo");
-//     todoEl.style.backgroundColor = `${
-//       todo.getCompletion() === false ? "lightblue" : "orange"
-//     }`;
-//     const doneBtnId = `done-btn-${todos.indexOf(todo)}`;
-//     const editBtnId = `edit-btn-${todos.indexOf(todo)}`;
-//     const deleteBtnId = `delete-btn-${todos.indexOf(todo)}`;
-
-//     todoEl.innerHTML = `
-
-//     <div id="todo-title">${todo.title}</div>
-//     <div>${todo.dueDate}</div>
-//     <div>${todo.priority}</div>
-//     <div class="buttons-container">
-//     <input data-index="${todos.indexOf(
-//       todo
-//     )}" id="${doneBtnId}" type="checkbox" ${
-//       todo.getCompletion() === false ? "" : "checked"
-//     }/>
-//     <button data-index="${todos.indexOf(todo)}" id="${editBtnId}" >🔍</button>
-//     <button data-index="${todos.indexOf(todo)}" id="${deleteBtnId}" >🗑️</button>
-//     </div>
-//     `;
-//     todosContainer.append(todoEl);
-
-//     const doneBtn = document.getElementById(doneBtnId);
-//     doneBtn.addEventListener("click", (event) => {
-//       console.log("done btn clicked");
-//       doneTodo(event);
-//     });
-
-//     const editBtn = document.getElementById(editBtnId);
-//     editBtn.addEventListener("click", (event) => {
-//       console.log("edit btn clicked");
-//       editTodoForm(event);
-//     });
-//     const deleteBtn = document.getElementById(deleteBtnId);
-//     deleteBtn.addEventListener("click", (event) => {
-//       console.log("delete btn clicked");
-//       deleteTodo(event);
-//     });
-//   }
-// };
 const renderTodos = (project) => {
   myProjects.selectProject(project);
   const todos = project.todos;
@@ -103,37 +50,40 @@ const renderTodos = (project) => {
     const todoEl = document.createElement("p");
     todoEl.classList.add("my-todo");
     todoEl.style.backgroundColor = `${
-      todo.getCompletion() === false ? "lightblue" : "orange"
+      todo.getCompletion() === true ? "#d0d6dcc9" : "rgb(228 235 242 / 79%)"
     }`;
     todoEl.innerHTML = `
+    <input data-index="${todos.indexOf(todo)}" id="done-btn" type="checkbox" ${
+      todo.getCompletion() === false ? "" : "checked"
+    }/>
     <div id="todo-title">${todo.title}</div>
     <div>${todo.dueDate}</div>
     <div>${todo.priority}</div>
     <div class="buttons-container"> 
-    <input data-index="${todos.indexOf(todo)}" id="done-btn" type="checkbox" ${
-      todo.getCompletion() === false ? "" : "checked"
-    }/>
     <button data-index="${todos.indexOf(todo)}" id="edit-btn">🔍</button>
-    <button data-index="${todos.indexOf(todo)}" id="delete-btn">X</button>
+    <button data-index="${todos.indexOf(todo)}" id="delete-btn">🗑️</button>
     </div>
     `;
 
     todosContainer.append(todoEl);
-    // attach event listener to delete button
-    const deleteButton = todoEl.querySelector("#delete-btn");
-    deleteButton.addEventListener("click", (event) => {
-      deleteTodo(event);
-    });
-
-    const doneButton = todoEl.querySelector("#done-btn");
-    doneButton.addEventListener("click", (event) => {
-      doneTodo(event);
-    });
-    const editButton = todoEl.querySelector("#edit-btn");
-    editButton.addEventListener("click", (event) => {
-      editTodoForm(event);
-    });
+    attachEventListenersToTheButtons(todoEl);
   }
+};
+const attachEventListenersToTheButtons = (todoEl) => {
+  const deleteButton = todoEl.querySelector("#delete-btn");
+  deleteButton.addEventListener("click", (event) => {
+    deleteTodo(event);
+  });
+
+  const doneButton = todoEl.querySelector("#done-btn");
+  doneButton.addEventListener("click", (event) => {
+    doneTodo(event);
+  });
+
+  const editButton = todoEl.querySelector("#edit-btn");
+  editButton.addEventListener("click", (event) => {
+    editTodoForm(event);
+  });
 };
 
 // const removeTodoListeners = () => {
