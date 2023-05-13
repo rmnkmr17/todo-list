@@ -6,6 +6,10 @@ const projectModal = document.querySelector(".project-modal");
 const addProject = document.querySelector("#add-project");
 const closeProject = document.querySelector("#close-project-modal");
 
+// const editModal = document.querySelector(".edit-modal");
+// const editButton = document.querySelector("#edit-btn");
+// const closeEditModalBtn = document.querySelector("#close-edit-modal");
+
 const openModal = () => {
   add.addEventListener("click", () => {
     modal.showModal();
@@ -26,8 +30,21 @@ const openProjectModal = () => {
 const closeProjectModal = () => {
   closeProject.addEventListener("click", () => {
     projectModal.close();
+    console.log("hi");
   });
 };
+
+// const openEditModal = () => {
+//   editButton.addEventListener("click", () => {
+//     editModal.showModal();
+//   });
+// };
+
+// const closeEditModal = () => {
+//   closeEditModalBtn.addEventListener("click", () => {
+//     editModal.close();
+//   });
+// };
 
 export {
   modal,
