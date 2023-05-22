@@ -1,3 +1,5 @@
+import { createTodos, createProject } from ".";
+
 const modal = document.querySelector(".modal");
 const add = document.querySelector("#add-task");
 const close = document.querySelector("#close-modal");
@@ -7,9 +9,13 @@ const addProject = document.querySelector("#add-project");
 const closeProject = document.querySelector("#close-project-modal");
 
 const openModal = () => {
-  add.addEventListener("click", () => {
-    modal.showModal();
-  });
+  add.addEventListener(
+    "click",
+    () => {
+      modal.showModal();
+    },
+    false
+  );
 };
 const closeModal = () => {
   close.addEventListener("click", () => {
@@ -26,11 +32,12 @@ const openProjectModal = () => {
 const closeProjectModal = () => {
   closeProject.addEventListener("click", () => {
     projectModal.close();
-    console.log("hi");
   });
 };
 
 export {
+  add,
+  close,
   modal,
   closeProject,
   projectModal,

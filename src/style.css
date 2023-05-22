@@ -292,7 +292,7 @@ select {
 }
 
 #done-btn {
-  accent-color: auto;
+  accent-color: rgb(144, 183, 238);
   display: block;
   width: 30px;
   height: 30px;

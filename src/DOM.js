@@ -1,16 +1,17 @@
-import { Project, Projects, myProjects, defaultProject } from "./projects";
+import { myProjects } from "./projects";
 import { deleteTodo, editTodoForm, doneTodo } from ".";
 
 const renderProjects = (newProject) => {
   const projectsContainer = document.querySelector(".projects-list");
   projectsContainer.innerHTML = "";
+
   for (let project of myProjects.projects) {
-    const newProjectBtn = createProjectButton(project.name);
-    newProjectBtn.textContent = project.name;
+    const newProjectEl = createProjectButton(project.name);
+    newProjectEl.textContent = project.name;
     if (project === newProject) {
-      newProjectBtn.classList.add("active-project"); // change background color
+      newProjectEl.classList.add("active-project"); // change background color
     }
-    projectsContainer.append(newProjectBtn);
+    projectsContainer.append(newProjectEl);
   }
   switchProject();
 };
@@ -23,9 +24,9 @@ const switchProject = () => {
       allProjects.forEach((p) => p.classList.remove("active-project"));
       // add active-project class to the clicked project button
       project.classList.add("active-project");
-
       for (let myProject of myProjects.projects) {
         if (project.textContent === myProject.name) {
+          myProjects.selectProject(myProject);
           renderTodos(myProject);
         }
       }
@@ -56,9 +57,21 @@ const renderTodos = (project) => {
     <input data-index="${todos.indexOf(todo)}" id="done-btn" type="checkbox" ${
       todo.getCompletion() === false ? "" : "checked"
     }/>
-    <div id="todo-title">${todo.title}</div>
-    <div>${todo.dueDate}</div>
-    <div>${todo.priority}</div>
+    <div style="${
+      todo.getCompletion() === false
+        ? "text-decoration:dashed"
+        : "text-decoration:line-through"
+    }" id="todo-title">${todo.title}</div>
+    <div style="${
+      todo.getCompletion() === false
+        ? "text-decoration:dashed"
+        : "text-decoration:line-through"
+    }" >${todo.dueDate}</div>
+    <div style="${
+      todo.getCompletion() === false
+        ? "text-decoration:dashed"
+        : "text-decoration:line-through"
+    }">${todo.priority}</div>
     <div class="buttons-container"> 
     <button data-index="${todos.indexOf(todo)}" id="edit-btn">🔍</button>
     <button data-index="${todos.indexOf(todo)}" id="delete-btn">🗑️</button>
@@ -69,6 +82,7 @@ const renderTodos = (project) => {
     attachEventListenersToTheButtons(todoEl);
   }
 };
+
 const attachEventListenersToTheButtons = (todoEl) => {
   const deleteButton = todoEl.querySelector("#delete-btn");
   deleteButton.addEventListener("click", (event) => {
@@ -85,41 +99,5 @@ const attachEventListenersToTheButtons = (todoEl) => {
     editTodoForm(event);
   });
 };
-
-// const removeTodoListeners = () => {
-//   const deleteButton = document.querySelector("#delete-btn");
-//   deleteButton.removeEventListener("click", (event) => {
-//     deleteTodo(event);
-//   });
-
-//   const doneButton = document.querySelector("#done-btn");
-//   doneButton.removeEventListener("click", (event) => {
-//     doneTodo(event);
-//   });
-
-//   const editButton = document.querySelector("#edit-btn");
-//   editButton.removeEventListener("click", (event) => {
-//     console.log("I'm the edit button and I'm invoked");
-//     editTodoForm(event);
-//   });
-// };
-
-// const addTodoListeners = () => {
-//   // attach event listener to delete button
-//   const deleteButton = document.querySelector("#delete-btn");
-//   deleteButton.addEventListener("click", (event) => {
-//     deleteTodo(event);
-//   });
-
-//   const doneButton = document.querySelector("#done-btn");
-//   doneButton.addEventListener("click", (event) => {
-//     doneTodo(event);
-//   });
-
-//   const editButton = document.querySelector("#edit-btn");
-//   editButton.addEventListener("click", (event) => {
-//     editTodoForm(event);
-//   });
-// };
 
 export { renderProjects, renderTodos };

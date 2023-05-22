@@ -15,8 +15,6 @@ const createProject = () => {
   projectForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const inputProject = document.querySelector("#title-project").value;
-
-    console.log(inputProject);
     const newProject = myProjects.createProject(inputProject);
     myProjects.selectProject(newProject);
     const newSelectedProject = myProjects.getSelectedProject();
@@ -38,12 +36,14 @@ const createTodos = () => {
       const dueDate = document.getElementById("date").value;
       const priority = document.getElementById("priority").value;
       const todo = selectedProject.addTodo(title);
-      console.log(dueDate);
+
       todo.setTitle(title);
       todo.setDescription(description);
       todo.setDueDate(dueDate);
       todo.setPriority(priority);
       todo.setCompleted(false);
+
+      const todos = selectedProject.getTodos();
       renderTodos(selectedProject);
       modal.close();
     } else {
@@ -67,7 +67,6 @@ function deleteTodo(event) {
 
 function deleteTodoFromProject(project, index) {
   const todos = project.getTodos();
-  console.log(todos);
   if (index >= 0 && index < todos.length) {
     const todo = todos[index];
     project.removeTodo(todo);
@@ -83,7 +82,6 @@ const editTodoForm = (event) => {
   const project = myProjects.getSelectedProject();
   const index = event.target.getAttribute("data-index");
   const todo = project.getTodos()[index];
-  console.log(project, index, todo);
 
   const dialog = document.querySelector(".edit-modal");
   dialog.innerHTML = "";
@@ -137,7 +135,7 @@ const editTodoForm = (event) => {
   const notesTextarea = document.createElement("textarea");
   notesTextarea.setAttribute("name", "description");
   notesTextarea.setAttribute("id", "edit-description");
-  notesContainer.setAttribute("value", todo.getDescription());
+  notesTextarea.textContent = todo.getDescription();
   notesContainer.appendChild(notesTextarea);
 
   const dateContainer = document.createElement("div");
@@ -221,7 +219,6 @@ const doneTodo = (event) => {
   const index = event.target.getAttribute("data-index");
   const project = myProjects.getSelectedProject();
   const todo = project.getTodos()[index];
-  console.log(todo);
   const doneButton = event.target;
   if (doneButton.checked === true) {
     todo.setCompleted(true);

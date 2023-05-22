@@ -46,6 +46,10 @@ class Projects {
     return this.selectedProject;
   }
 
+  getAllProjects(projects) {
+    this.projects = projects;
+  }
+
   getProjects() {
     if (this.selectedProject) {
       return [this.selectedProject];
@@ -59,7 +63,7 @@ class Projects {
   }
 }
 
-const myProjects = new Projects();
+let myProjects = new Projects();
 const defaultProject = myProjects.createProject("Default");
 
 export { Project, Projects, myProjects, defaultProject };
